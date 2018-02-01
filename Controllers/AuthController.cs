@@ -41,7 +41,8 @@ namespace DatingApp.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+            if(!string.IsNullOrEmpty(userForRegisterDto.Username))
+                userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             var userToCreate = new User
             {
@@ -78,7 +79,8 @@ namespace DatingApp.API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor);
             var tokenString = tokenHandler.WriteToken(token);
 
-            return Ok(new { tokenString });
+            return Ok(new { tokenString });            
+
         }
     }
 }
