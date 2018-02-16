@@ -11,9 +11,10 @@ using System;
 namespace DatingApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20180212001040_ExtendedUserClass")]
+    partial class ExtendedUserClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +33,7 @@ namespace DatingApp.API.Migrations
 
                     b.Property<string>("Url");
 
-                    b.Property<int>("UserId");
+                    b.Property<int?>("UserId");
 
                     b.HasKey("Id");
 
@@ -91,10 +92,9 @@ namespace DatingApp.API.Migrations
 
             modelBuilder.Entity("DatingApp.API.Models.Photo", b =>
                 {
-                    b.HasOne("DatingApp.API.Models.User", "User")
+                    b.HasOne("DatingApp.API.Models.User")
                         .WithMany("Photos")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
